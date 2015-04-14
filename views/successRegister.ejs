@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ </head>
+  <body ng-app="" ng-controller="linkedinController" style="margin-top: -50px;margin-left: -50px;margin-right: -50px;">
+    <nav class="navbar navbar-default" style="padding-bottom: 10px;box-shadow: 3px 3px 5px #888888; background-color: #F5F5F5;">
+ 	<table>
+ 		<tr>
+ 			<td>
+	 			<img src="/stylesheets/imageedit_2_8077615391.gif" style="margin-left: 150px;margin-top: 20px;">
+	 		</td>
+	 		<td>
+			 	<div class="col-sm-2">
+			 		<!-- <label for="Email">Email Address</label> -->
+			        <input ng-model="inputUsername" class="form-control" type="email" placeholder="Email Address" name="inputUsername" style="margin-left: 500px;margin-right: 1000px;margin-top: 10px;" required>
+			    </div> 
+			    <div class="col-sm-2">
+			        <input ng-model="inputPassword" class="form-control" type="password" placeholder="Password" name="inputPassword" style="margin-left: 480px;margin-top: 10px;" required>
+			    </div> 
+			     <button ng-click="signIn()" style="margin-left: 480px;margin-top: 14px;">Sign in</button>
+			</td>
+		</tr>
+	</table>
+	</nav>
+	<center><label><h1>Successfully Registered. Please Login..!!</h1></label></center>
+	<table>
+		<tr>
+			<td>
+				<div class="form-group form-group-lg">
+					<div class="col-sm-2">
+			        <input ng-model="inputFirstName" class="form-control input-lg" type="text" placeholder="First Name" name="inputFirstName" style="margin-left: 800px;margin-right: 1000px;margin-top: 200px;" required>
+			   		</div>
+			    </div> 
+			    <div class="form-group form-group-lg">
+					<div class="col-sm-2">
+			        <input ng-model="inputLastName" class="form-control" type="text" placeholder="Last Name" name="inputLastName" style="margin-left: 800px;margin-right: 1000px;margin-top: 185px;" required>
+			  		</div>
+			    </div> 
+		    <td>
+		</tr>
+		<tr>
+			<td>
+			    <div class="form-group form-group-lg">
+					<div class="col-sm-4">
+			        <input ng-model="inputEmailAddress" class="form-control" type="email" placeholder="Email Address" name="inputEmailAddress" style="margin-left: 800px;margin-right: 1000px;margin-top: 20px;" required>
+			    	</div>
+			    </div> 
+		    <td>
+		</tr>
+		<tr>
+			<td>
+			   <div class="form-group form-group-lg">
+					<div class="col-sm-4">
+			        <input ng-model="inputPassword1" class="form-control" type="password" placeholder="Password" name="inputPassword1" style="margin-left: 800px;margin-right: 1000px;margin-top: 20px;" required>
+			    	</div>
+			    </div> <br><br><br>
+			    <button ng-click="signUp()" class="btn btn-warning" style="padding-left: 260px;padding-right: 285px;margin-left: 815px;margin-top: 14px;">Sign up</button>
+		    <td>
+		</tr>
+		
+	</table>
+<script>
+	function linkedinController($scope,$http,$location) {
+	    
+		$scope.signIn = function() {
+	    	$http({
+	            method: 'POST',
+	            url: '/signin',
+	            data: { "username": $scope.inputUsername, "password": $scope.inputPassword }
+	            
+	         }).success(function(response){
+	           
+	            alert(JSON.stringify(response));
+	            
+	            if(response.login == "Success")
+	           		window.location = '/successLogin';
+	            else
+	            	window.location = '/failLogin';
+	        }).error(function(error){
+	            alert("error");
+	        });
+	    };
+
+	    $scope.signUp = function() {
+	    	$http({
+	            method: 'POST',
+	            url: '/signup',
+	            data: { "email": $scope.inputEmailAddress, "password": $scope.inputPassword1 , "firstname": $scope.inputFirstName, "lastname": $scope.inputLastName}
+	            
+	         }).success(function(response){
+	           
+	            alert(JSON.stringify(response));
+	            
+	            if(response.register == "Success")
+	           		window.location = '/successRegister';
+	            else
+	            	window.location = '/failRegister';
+	        }).error(function(error){
+	            alert("error");
+	        });
+	    };
+	}
+	</script>
+
+  </body>
+</html>

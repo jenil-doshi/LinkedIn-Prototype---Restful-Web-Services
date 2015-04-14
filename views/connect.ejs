@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ </head>
+  <body ng-app="" ng-controller="linkedinController" style="margin-top: -50px;margin-left: -50px;margin-right: -50px;" onload="sessionRestore()">
+  
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img src="/stylesheets/download.gif" style="margin-left: 150px;margin-top: 7px;">
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/successLogin">Home</a></li>
+        <li><a href="/viewProfile">View Profile</a></li>
+        <li><a href="/connect">Connect</a></li>
+        <li><a href="/invitation">Invitation</a></li>
+        <li><a href="/signout">Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<%    var i=0; 
+     for(var i=0; i<firstname.length; i++) {  %>
+                   <div class="container" ng-hide="hideUser" id="<%=userid[i]%>">
+                                <div class="row" style="margin-left: 20px;">
+                                     
+                                      <br>
+
+                                     <p ng-model="firstname" value="fristname"> First Name: <%= firstname[i] %></p> <br>
+                                      <p ng-model="lastname">Last Name: <%= lastname[i] %></p><br>
+                                      <p ng-model="emailid">Email ID: <%= emailid[i] %></p> <br>
+                                      
+                                  </div> 
+                                  <input type="button" ng-click = insertPendingConnection(<%=userid[i]%>) class="btn btn-primary" style="margin-left: 20px;" value="Connect">
+                                  
+
+                                   <br>
+                                </div>                    
+<% } %>
+ 
+ <script>
+  function linkedinController($scope,$http,$location) {
+      //$scope.hideUser = false;
+    $scope.insertPendingConnection = function(userid) {
+      document.getElementById(userid).innerHTML = ' ';
+      //$scope.hideUser = !$scope.hideUser;
+        $http({
+
+              method: 'POST',
+              url: '/insertPendingConnection',
+              data: { 
+                        "firstname" : $scope.firstname,
+                        "lastname" : $scope.lastname,
+                        "email" : $scope.emailid,
+                        "userid" : userid
+                    }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.connectUser == "Success")
+                alert("Invitation Sent");
+              else
+                alert("Error Occured");
+          }).error(function(error){
+              alert("error");
+          });
+      };
+  }
+  </script>
+  </body>
+</html>

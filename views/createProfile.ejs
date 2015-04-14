@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  
+ </head>
+  <body ng-app="" ng-controller="userProfileController" style="margin-top: -50px;margin-left: -50px;margin-right: -50px;">
+  
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <table>
+      <tr>
+        <td>
+<div>
+      <ul class="nav navbar-nav" style="margin-left: 400px;">
+        <li class="active"><a href="/successLogin">Home</a></li>
+        <li><a href="/viewProfile">View Profile</a></li>
+        <li><a href="/connect">Connect</a></li>
+        <li><a href="/invitation">Invitation</a></li>
+        <li><a href="/signout">Sign Out</a></li>
+        <li> 
+                <div class="input-group" style="margin-right: 00px;margin-top: 7px;">
+                    <input type="text" class="form-control"  id="txtSearch" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" ng-click="search()"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            
+            </li> 
+      </ul>
+    </div>
+        </td>
+         
+        <td>
+        </td>
+      </tr>
+    </table>
+  </div>
+</nav>
+<div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row" style="padding-bottom: 20px;margin-left: 20px;">
+     
+      <div class="media-left">
+          <input id="fileupload" name="fileupload" type="file" />
+              <img id="imgUser" class="media-object" src="{{userdetails.image}}" alt="" width=200 height=200> <!-- /images/noimage.png-->
+            </a>
+          </div>
+        <div class="col-md-9 personal-info">
+      
+       <legend> <h3>Personal info</h3></legend>
+        
+              <!-- Summary -->
+                    <div class="container1">
+                             <center><legend>Summary</legend></center>
+                            
+                            <div class="row1">
+                             <div class="form-group">
+                    
+                                 <textarea ng-model="userSummary" name="userSummary" class="field span5" rows="5" 
+                                 value="userSummary" 
+                                 style="padding-right: 200px;margin-left: 70px;"></textarea>
+                             </div>
+                          </div>
+                          <input type="button" style="margin-bottom: 20px;" ng-click="saveSummary()" class="btn btn-primary" value="Save Changes">
+                          <span></span>
+                          <input type="reset" class="btn btn-default" value="Cancel" style="margin-bottom: 20px;">
+                        </div>
+                   <form ng-submit="saveExperience()">
+                    <div class="container1" id="exp_row_1">
+                             <center><legend>Experience1</legend></center>
+                        <div class="row" style="margin-left: 20px;">
+                             <div class="form-group">
+                              <label class="col-sm-2 control-label" for="textinput">Company:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="companyName" style="height: 30px;" id="companyName_1" name="companyName" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                             <br><br><p></p>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Title:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputTitle" style="height: 30px;" id="inputTitle_1" name="inputTitle" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                            <br><br><p></p>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Location:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputLocation" style="height: 30px;" id="inputLocation_1" name="inputLocation" placeholder="" class="form-control">
+                                </div>
+                              </div>
+
+                             <br><br><p></p>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Start Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="startdate" style="height: 30px;" id="startdate_1" name="startdate" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                                <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">End Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="enddate" style="height: 30px;" id="enddate_1" name="enddate" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput" style="margin-top: 10px;">Description:</label>
+                                <div class="col-sm-9">
+                                  <textarea class="field span5" id="inputDescription_1" ng-model="inputDescription" name="inputDescription" rows="5" style="margin-top: 20px;padding-right: 400px;"></textarea>
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                              <div class="col-md-8" style="padding-top: 20px;margin-bottom: 20px;">
+                               
+                                 <input type="button" onclick="addExperience()" class="btn btn-primary" value="Add Experience" id="add">
+                              </div>
+                               
+                          </div>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                          <input type="reset" class="btn btn-default" value="Cancel">
+                  
+                      </form>
+             <form ng-submit="saveEducation()">
+              <div class="container1" id="edu_row_1">
+               
+                             <center><legend>Education</legend></center>
+                              <div class="row" style="margin-left: 20px;">
+                             <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">School:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputSchool" style="height: 30px;" id="inputSchool1" name="inputSchool" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                                <br><br><p></p>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" style="height: 30px;" for="textinput">Field:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputField" id="inputField1" name="inputField" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Degree level:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="level" style="height: 30px;" style="height: 30px;" id="level1" name="level1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Grade:</label>
+                                <div class="col-sm-9">
+                                  <input type="text" ng-model="inputGrade" style="height: 30px;" id="inputGrade1" name="inputGrade" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">Start Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="startdate1" style="height: 30px;" id="startdate11"name="startdate1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                                <div class="form-group">
+                                <label class="col-sm-2 control-label" for="textinput">End Date:</label>
+                                <div class="col-sm-9">
+                                  <input type="date" ng-model="enddate1" style="height: 30px;" id="enddate11" name="enddate1" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                              <br><br><p></p>
+                                <label class="col-sm-2 control-label" for="textinput" style="margin-top: 10px;">Description:</label>
+                                <div class="col-sm-9">
+                                  <textarea class="field span5" ng-model="dp" id="dp1" name="dp" rows="5" id="comment" 
+                                 style="margin-top: 20px;padding-right: 400px;"></textarea>
+                                </div>
+                                  <div class="col-md-8" style="padding-top: 20px;margin-bottom: 20px;">
+                               
+                                 <input type="button" onclick="addEducation()" class="btn btn-primary" value="Add Education" id="add">
+                              </div>
+                              </div>
+                              <br><br><p></p>
+                          </div>
+                          <input type="submit" class="btn btn-primary" value="Save Changes">
+                          <input type="reset" class="btn btn-default" value="Cancel">
+                  
+                        </form>
+
+                     <div class="container1">
+                      <div>
+                        <legend><center><h2>Skills</h2></center></legend>
+                        <div>
+                          <span></span>
+                          [ <a href="" ng-click="archive()">clear</a> ]
+                          <ul class="unstyled">
+                            <li ng-repeat="todo in todos">
+                              <input type="checkbox" ng-model="todo.done">
+                              <span class="done-{{todo.done}}">{{todo.text}}</span>
+                            </li>
+                          </ul>
+                          <form ng-submit="addTodo()">
+                            <input type="text" ng-model="todoText"  size="30"
+                                   placeholder="add new todo here" style="height:30px;">
+                            <input class="btn-primary" style="margin-top: -10px;" type="submit" value="Add">
+                            <br>
+                            <input type="button" ng-click="saveSkill()" style="margin-bottom: 20px;" class="btn btn-primary" value="Save Skills">
+                          </form>
+                        </div>
+                      </div>
+                     </div>
+
+                           
+        </div>
+
+<script>
+
+
+function addEducation(){
+  console.log("Inside Add Education");
+  var current_row = parseInt(document.getElementById('edu_row_cnt').value);
+  
+  var new_row_no=  current_row+1;
+    var edurow = " <div class='container1' id='edu_row_"+new_row_no+"'>\
+               \
+                             <center><legend>Education"+new_row_no+"</legend></center>\
+                              <div class='row' style='margin-left: 20px;'>\
+                             <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>School:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='text' style='height: 30px;' ng-model='inputSchool' id='inputSchool"+new_row_no+"' name='inputSchool' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                                <br><br><p></p>\
+                              <!-- Text input-->\
+                              <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>Field:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='text' style='height: 30px;' ng-model='inputField' id='inputField"+new_row_no+"' name='inputField' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                              <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>Degree level:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='text' style='height: 30px;' ng-model='level' id='level"+new_row_no+"' name='level' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                              <!-- Text input-->\
+                              <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>Grade:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='text' style='height: 30px;' ng-model='inputGrade' id='inputGrade"+new_row_no+"' name='inputGrade' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                              <!-- Text input-->\
+                              <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>Start Date:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='date' style='height: 30px;' ng-model='startdate1' id='startdate1"+new_row_no+"' name='startdate1' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                                <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput'>End Date:</label>\
+                                <div class='col-sm-9'>\
+                                  <input type='date' style='height: 30px;' ng-model='enddate1' id='enddate1"+new_row_no+"' name='enddate1' placeholder='' class='form-control'>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                              <div class='form-group'>\
+                                <label class='col-sm-2 control-label' for='textinput' style='margin-top: 10px;'>Description:</label>\
+                                <div class='col-sm-9'>\
+                                <textarea class='field span5' ng-model='dp' id='dp"+new_row_no+"' name='dp' rows='5' id='comment' style='margin-top: 20px;padding-right: 400px;'></textarea>\
+                                </div>\
+                              </div>\
+                              <br><br><p></p>\
+                              <div class='col-md-8' style='padding-top: 20px;'>\
+                                <button onclick='addEducation()' class='btn btn-primary' value='Add Experience' id='add'>Add Education</button> \
+                                <span></span> \
+                                <input type='button' onclick='deleteEducation()' class='btn btn-primary' value='Delete Education' id='delete'>\
+                              </div>\
+                          </div>";
+    
+    
+      $(edurow).insertAfter('#edu_row_'+current_row);
+    document.getElementById('edu_row_cnt').value = new_row_no;
+}
+
+
+
+function addExperience(){
+  
+  var current_row = parseInt(document.getElementById('exp_row_cnt').value);
+  
+  var new_row_no=  current_row+1;
+    var exprow = "<div class='container1' id='exp_row_"+new_row_no+"'> \
+                             <center><legend>Experience"+new_row_no+"</legend></center> \
+                        <div class='row' style='margin-left: 20px;'> \
+                             <div class='form-group'> \
+                             <label class='col-sm-2 control-label' for='textinput'>Company:</label> \
+                                <div class='col-sm-9'> \
+\
+                                <input type='text' ng-model='companyName"+new_row_no+"' name='companyName' id='companyName_"+new_row_no+"' style='height: 30px;' placeholder='' class='form-control'> \
+                                </div> \
+                              </div> <br><br><p></p>\
+\
+                              <!-- Text input--> \
+                              <div class='form-group'> \
+                              <label class='col-sm-2 control-label' for='textinput'>Title:</label> \
+                                <div class='col-sm-9'> \
+                                  <input type='text' ng-model='inputTitle"+new_row_no+"' name='inputTitle' id='inputTitle_"+new_row_no+"' style='height: 30px;' placeholder='' class='form-control'> \
+                                </div> \
+                              </div><br><br><p></p> \
+\
+                              <!-- Text input--> \
+                              <div class='form-group'> \
+                                <label class='col-sm-2 control-label' for='textinput'>Location:</label> \
+                                <div class='col-sm-9'> \
+                                  <input type='text' ng-model='inputLocation"+new_row_no+"'  name='inputLocation' style='height: 30px;' id='inputLocation_"+new_row_no+"' placeholder='' class='form-control'> \
+                                </div> \
+                              </div><br><br><p></p> \
+\
+                              <!-- Text input--> \
+                              <div class='form-group'> \
+                                <label class='col-sm-2 control-label' for='textinput'>Start Date:</label> \
+                                <div class='col-sm-9'> \
+                                  <input type='date' style='height: 30px;' id='startdate_"+new_row_no+"' ng-model='startdate"+new_row_no+"' name='startdate' placeholder='' class='form-control'>\
+                                </div> \
+                              </div><br><br><p></p> \
+\
+                                <div class='form-group'> \
+                                <label class='col-sm-2 control-label' for='textinput'>End Date:</label> \
+                                <div class='col-sm-9'> \
+                                  <input type='date' style='height: 30px;' id='enddate_"+new_row_no+"' ng-model='enddate"+ new_row_no+"' name='enddate' placeholder='' class='form-control'>\
+                                </div> \
+                              </div><br><br><p></p> \
+\
+                              <div class='form-group'> \
+                                <label class='col-sm-2 control-label' for='textinput' style='margin-top: 10px;'>Description:</label> \
+                                <div class='col-sm-9'> \
+                                  <textarea class='field span5' id='inputDescription_"+new_row_no+"' ng-model='inputDescription"+new_row_no+"' name='inputDescription' rows='5' id='comment' style='margin-top: 20px;padding-right: 400px;'></textarea> \
+                                </div> \
+                              </div><br><br><p></p> \
+                              <div class='col-md-8' style='padding-top: 20px;'> \
+                                <button onclick='addExperience()' class='btn btn-primary' value='Add Experience' id='add'>Add Experience</button> \
+                                <span></span> \
+                                <input type='button' onclick='deleteExperience()' class='btn btn-primary' value='Delete Experience' id='delete'>\
+                              </div> \
+                          </div> <br><br><p></p>\
+                        </div>";
+    
+    
+      $(exprow).insertAfter('#exp_row_'+current_row);
+    document.getElementById('exp_row_cnt').value = new_row_no;
+}
+
+
+
+function deleteEducation(){
+  
+  
+  var current_row = parseInt(document.getElementById('edu_row_cnt').value);
+  alert(current_row);
+  $('#edu_row_'+current_row).remove();
+  if(current_row>1){
+  document.getElementById('edu_row_cnt').value = current_row-1;
+  }
+}
+
+function deleteExperience(){
+  
+  
+  var current_row = parseInt(document.getElementById('exp_row_cnt').value);
+  $('#exp_row_'+current_row).remove();
+  if(current_row>1){
+  document.getElementById('exp_row_cnt').value = current_row-1;
+  }
+}
+
+
+function userProfileController($scope,$http,$location) {
+    
+    $(":file").change(function () {
+        alert(1);
+                if (this.files && this.files[0]) {
+                  console.log(this.files);
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[0]);
+
+                    console.log(reader.readAsDataURL(this.files[0]));
+                }
+            });
+
+
+    function imageIsLoaded(e) {
+            console.log("***************result load:")
+            console.log(e.target.result);
+            
+            //$scope.userdetails.image =  e.target.result;
+           // var img= $scope.userdetails.image;
+            
+           
+           $http.post('/uservalue',{image: e.target.result});
+      
+
+            $('#imgUser').attr('src', e.target.result);
+            console.log("**********************");
+      console.log($('#imgUser'));
+        };
+        
+
+
+     $scope.display = function(){
+        var canva = document.getElementById("cnv");
+        console.log(canva);
+        console.log("here");
+
+        var dataURL = canva.toDataURL();
+        console.log(dataURL);
+
+        $http({
+              method: 'POST',
+              url: '/saveImage',
+              data: { 
+                      "dataURL": dataURL,
+                    }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.save == "Success")
+               alert("Image Saved");
+              else
+                alert("Image not saved");
+          }).error(function(error){
+              alert("error");
+          });
+      }
+
+
+    $scope.todos = [];
+
+    $scope.addTodo = function() {
+      $scope.todos.push({text:$scope.todoText, done:false});
+      $scope.todoText = '';
+
+    };
+
+    $scope.remaining = function() {
+      var count = 0;
+      angular.forEach($scope.todos, function(todo) {
+        count += todo.done ? 0 : 1;
+      });
+      return count;
+    };
+
+    $scope.archive = function() {
+      var oldTodos = $scope.todos;
+      $scope.todos = [];
+      angular.forEach(oldTodos, function(todo) {
+        if (!todo.done) $scope.todos.push(todo);
+      });
+    };
+
+    $scope.saveSkill = function(){
+
+      $http({
+              method: 'POST',
+              url: '/saveSkill',
+              data: { 
+                      "skills": $scope.todos,
+                    }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.save == "Success")
+               alert("Skills Saved");
+              else
+                alert("Skills not saved");
+          }).error(function(error){
+              alert("error");
+          });
+    }
+
+    $scope.saveSummary = function() {
+      console.log("Insife Save Summary ");
+        $http({
+              method: 'POST',
+              url: '/saveSummary',
+              data: { 
+                      "userSummary": $scope.userSummary, 
+                    }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.save == "Success")
+               alert("Summary Saved");
+              else
+                alert("Alert Saving Summary");
+          }).error(function(error){
+              alert("error");
+          });
+      };
+
+
+ $scope.saveExperience = function() {
+        console.log("Insife Save Exp");
+        var no_of_exp =  parseInt(document.getElementById('exp_row_cnt').value);
+        alert("Inside saveExperience"+ no_of_exp);
+        console.log("Exp Row Count" + no_of_exp);
+                  var exp_data = {};
+                  for(var i = 1 ; i <= no_of_exp ; i++){
+                      alert(i);        
+                      exp_data["row_"+i] = { 
+                     
+                      "companyName" : document.getElementById("companyName_"+i).value.trim(),
+                      "title" : document.getElementById("inputTitle_"+i).value.trim(),
+                      "location" : document.getElementById("inputLocation_"+i).value.trim(),
+                      "startdate" : document.getElementById("startdate_"+i).value.trim(),
+                      "enddate" : document.getElementById("enddate_"+i).value.trim(),
+                      "description" : document.getElementById("inputDescription_"+i).value.trim()
+                      };
+                                   
+                  }          
+        $http({
+              method: 'POST',
+              url: '/saveExperience',
+              data: {
+                "expData": exp_data,
+              }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.save == "Success")
+                alert("Experience Saved");
+              else
+                alert("Experience not saved");
+          }).error(function(error){
+              alert("error");
+          });
+      };
+
+
+$scope.saveEducation = function() {
+        var no_of_edu =  parseInt(document.getElementById('edu_row_cnt').value);
+        
+                  var edu_data = {};
+                  for(var i = 1 ; i <= no_of_edu ; i++){
+                      alert(i);        
+                      edu_data["row_"+i] = { 
+                     
+                      "school": document.getElementById("inputSchool"+i).value.trim(),
+                      "field": document.getElementById("inputField"+i).value.trim(),
+                      "grade": document.getElementById("inputGrade"+i).value.trim(),
+                      "startdate1": document.getElementById("startdate1"+i).value.trim(),
+                      "enddate1": document.getElementById("enddate1"+i).value.trim(),
+                      "dp": document.getElementById("dp"+i).value.trim(),
+                      "level": document.getElementById("level"+i).value.trim()
+                      };
+                                   
+                  }          
+        $http({
+              method: 'POST',
+              url: '/saveEducation',
+              data: {
+                "eduData": edu_data,
+              }
+              
+           }).success(function(response){
+             
+              alert(JSON.stringify(response));
+              
+              if(response.save == "Success")
+                alert("Education Saved");
+              else
+                alert("Education not saved");
+          }).error(function(error){
+              alert("error");
+          });
+      };
+
+
+ 
+  }
+  </script>
+
+  
+<input type="hidden" value=1 id="exp_row_cnt"/>
+<input type="hidden" value=1 id="edu_row_cnt"/>
+  </body>
+</html>
